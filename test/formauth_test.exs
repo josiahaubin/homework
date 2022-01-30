@@ -17,7 +17,7 @@ defmodule FormAuthentication do
     input_into_field(passwordInput, "SuperSecretPassword!")
     click(submitButton)
     # Assert
-    assert element_displayed?({:class, "subheader"})
+    assert element_displayed?({:class, "subheader"}) == true
     assert visible_text({:class, "subheader"}) == "Welcome to the Secure Area. When you are done click logout below."
   end
 
@@ -32,9 +32,9 @@ defmodule FormAuthentication do
     input_into_field(passwordInput, "SuperSecretPassword!")
     click(submitButton)
     # Assert
-    assert element_displayed?({:class, "radius"})
+    assert element_displayed?({:class, "radius"}) == true
     click({:class, "radius"})
-    assert element_displayed?({:id, "login"})
+    assert element_displayed?({:id, "login"}) == true
   end
 
   test "Inputs improper username auth creds into form and should not be logged into application" do
@@ -48,7 +48,7 @@ defmodule FormAuthentication do
     input_into_field(passwordInput, "SuperSecretPassword!")
     click(submitButton)
     # Assert
-    assert element_displayed?({:class, "error"})
+    assert element_displayed?({:class, "error"}) == true
   end
 
   test "Inputs improper password auth creds into form and should not be logged into application" do
@@ -62,6 +62,6 @@ defmodule FormAuthentication do
     input_into_field(passwordInput, "Ｔｈｅ ｑｕｉｃｋ ｂｒｏｗｎ ｆｏｘ ｊｕｍｐｓ ｏｖｅｒ ｔｈｅ ｌａｚｙ ｄｏｇ")
     click(submitButton)
     # Assert
-    assert element_displayed?({:class, "error"})
+    assert element_displayed?({:class, "error"}) == true
   end
 end
