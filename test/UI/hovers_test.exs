@@ -1,3 +1,5 @@
+Code.require_file("helpers/hover_helper.exs")
+
 defmodule Hovers do
   # Import Helpers
   use Hound.Helpers
@@ -10,9 +12,9 @@ defmodule Hovers do
 
   test "User hovers first image and can view name of the first image" do
     # Arrange
-    navigate_to("https://the-internet.herokuapp.com/hovers")
+    HoverHelper.navigate_to_url
     # Act
-    move_to({:xpath, "//*[@id='content']/div/div[1]/img"}, 10, 10)
+    HoverHelper.move_to_first_img
     # Assert
     assert element_displayed?({:xpath, "//*[@id='content']/div/div[1]/div/h5"}) == true
     assert visible_text({:xpath, "//*[@id='content']/div/div[1]/div/h5"}) == "name: user1"
@@ -20,10 +22,10 @@ defmodule Hovers do
 
   test "User hovers second image and is able to select link to view profile of second image" do
     # Arrange
-    navigate_to("https://the-internet.herokuapp.com/hovers")
+    HoverHelper.navigate_to_url
     # Act
-    move_to({:xpath, "//*[@id='content']/div/div[2]/img"}, 10, 10)
-    click({:xpath, "//*[@id='content']/div/div[2]/div/a"})
+    HoverHelper.move_to_second_img
+    HoverHelper.click_profile_link
     # Assert
     profileUrl = current_url()
     assert profileUrl == "https://the-internet.herokuapp.com/users/2"
