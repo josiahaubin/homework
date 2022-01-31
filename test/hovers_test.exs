@@ -6,6 +6,8 @@ defmodule Hovers do
   # Start Session
   hound_session()
 
+  @moduletag :hover_tests
+
   test "User hovers first image and can view name of the first image" do
     # Arrange
     navigate_to("https://the-internet.herokuapp.com/hovers")

@@ -6,6 +6,8 @@ defmodule EntryAd do
   # Start Session
   hound_session()
 
+  @moduletag :entry_ad_tests
+
   test "Ad should appear on intial page load" do
     # Arrange
     navigate_to("https://the-internet.herokuapp.com/entry_ad")
@@ -36,6 +38,12 @@ defmodule EntryAd do
     click({:id, "restart-ad"})
     refresh_page()
     # Assert
-    assert element_displayed?({:id, "modal"}) == true
+    try do
+      assert element_displayed?({:id, "modal"}) == true
+    rescue
+      e ->
+        take_screenshot("test/screenshots/entryad-reenablead-error.png")
+      raise e
+    end
   end
 end

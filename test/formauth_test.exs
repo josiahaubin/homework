@@ -6,6 +6,8 @@ defmodule FormAuthentication do
   # Start Session
   hound_session()
 
+  @moduletag :form_auth_tests
+
   test "Inputs proper auth creds into form and logs user into application" do
     # Arrange
     navigate_to("https://the-internet.herokuapp.com/login")

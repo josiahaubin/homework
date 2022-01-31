@@ -1,6 +1,8 @@
 defmodule API do
   use ExUnit.Case
 
+  @moduletag :api_tests
+
   test "GET Get user by real user id" do
     resp = HTTPoison.get!("https://reqres.in/api/users/2")
     assert resp.status_code == 200
