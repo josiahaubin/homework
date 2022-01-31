@@ -1,3 +1,5 @@
+Code.require_file("helpers/entryad_helper.exs")
+
 defmodule EntryAd do
   # Import Helpers
   use Hound.Helpers
@@ -10,7 +12,7 @@ defmodule EntryAd do
 
   test "Ad should appear on intial page load" do
     # Arrange
-    navigate_to("https://the-internet.herokuapp.com/entry_ad")
+    EntryAdHelper.navigate_to_url
     # Act
     :timer.sleep(1000)
     # Assert
@@ -25,10 +27,10 @@ defmodule EntryAd do
 
   test "User closes ad and should not reappear on reload" do
     # Arrange
-    navigate_to("https://the-internet.herokuapp.com/entry_ad")
+    EntryAdHelper.navigate_to_url
     # Act
     :timer.sleep(1000)
-    click({:xpath, "//*[@id='modal']/div[2]/div[3]/p"})
+    EntryAdHelper.close_modal
     refresh_page()
     # Assert
     try do
@@ -43,11 +45,11 @@ defmodule EntryAd do
   # Failing test
   test "User reactivates ad by clicking enable link after ad has been closed" do
     # Arrange
-    navigate_to("https://the-internet.herokuapp.com/entry_ad")
+    EntryAdHelper.navigate_to_url
     # Act
     :timer.sleep(1000)
-    click({:xpath, "//*[@id='modal']/div[2]/div[3]/p"})
-    click({:id, "restart-ad"})
+    EntryAdHelper.close_modal
+    EntryAdHelper.restart_modal
     refresh_page()
     # Assert
     try do
