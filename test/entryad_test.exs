@@ -14,7 +14,13 @@ defmodule EntryAd do
     # Act
     :timer.sleep(1000)
     # Assert
-    assert element_displayed?({:id, "modal"}) == true
+    try do
+      assert element_displayed?({:id, "modal"}) == true
+    rescue
+      e ->
+        take_screenshot("test/screenshots/entryad-intialpageload-error.png")
+      raise e
+    end
   end
 
   test "User closes ad and should not reappear on reload" do
@@ -25,7 +31,13 @@ defmodule EntryAd do
     click({:xpath, "//*[@id='modal']/div[2]/div[3]/p"})
     refresh_page()
     # Assert
-    assert element_displayed?({:id, "modal"}) == false
+    try do
+      assert element_displayed?({:id, "modal"}) == false
+    rescue
+      e ->
+        take_screenshot("test/screenshots/entryad-closead-error.png")
+      raise e
+    end
   end
 
   # Failing test
